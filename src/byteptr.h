@@ -16,6 +16,8 @@
 #endif
 
 #include "endian.h"
+#include "doomdef.h"
+
 
 #ifndef SRB2_BIG_ENDIAN
 //

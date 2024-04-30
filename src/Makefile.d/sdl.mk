@@ -37,7 +37,7 @@ sources+=sdl/mixer_sound.c
   opts+=-DHAVE_MIXERX
   libs+=-lSDL2_mixer_ext
   else
-  libs+=-lSDL2_mixer
+  libs+=-lSDL2_mixer -lmodplug -lmpg123
   endif
 endif
 

@@ -78,10 +78,10 @@ typedef LPVOID (WINAPI *p_MapViewOfFile) (HANDLE, DWORD, DWORD, DWORD, SIZE_T);
 #include "SDL_cpuinfo.h"
 #define HAVE_SDLCPUINFO
 
-#if defined (__unix__) || defined(__APPLE__) || (defined (UNIXCOMMON) && !defined (__HAIKU__))
+#if defined (__unix__) || defined(__APPLE__) || (defined (UNIXCOMMON) && !defined (__HAIKU__)) && !defined (__WIIU__)
 #if defined (__linux__)
 #include <sys/vfs.h>
-#else
+#elif
 #include <sys/param.h>
 #include <sys/mount.h>
 /*For meminfo*/
@@ -94,7 +94,7 @@ typedef LPVOID (WINAPI *p_MapViewOfFile) (HANDLE, DWORD, DWORD, DWORD, SIZE_T);
 #endif
 #endif
 
-#if defined (__linux__) || (defined (UNIXCOMMON) && !defined (__HAIKU__))
+#if defined (__linux__) || (defined (UNIXCOMMON) && !defined (__HAIKU__)) && !defined (__WIIU__)
 #ifndef NOTERMIOS
 #include <termios.h>
 #include <sys/ioctl.h> // ioctl
@@ -137,7 +137,7 @@ typedef LPVOID (WINAPI *p_MapViewOfFile) (HANDLE, DWORD, DWORD, DWORD, SIZE_T);
 #include <errno.h>
 #endif
 
-#if defined (__unix__) || defined(__APPLE__) || defined (UNIXCOMMON)
+#if defined (__unix__) || defined(__APPLE__) || defined (UNIXCOMMON) && !defined (__WIIU__)
 #ifndef NOEXECINFO
 #include <execinfo.h>
 #endif
@@ -2678,7 +2678,7 @@ void I_ShutdownSystem(void)
 
 void I_GetDiskFreeSpace(INT64 *freespace)
 {
-#if defined (__unix__) || defined(__APPLE__) || defined (UNIXCOMMON)
+#if defined (__unix__) || defined(__APPLE__) || defined (UNIXCOMMON) && !defined (__WIIU__)
 #if defined (SOLARIS) || defined (__HAIKU__)
 	*freespace = INT32_MAX;
 	return;
@@ -2993,6 +2993,9 @@ static const char *locateWad(void)
 
 const char *I_LocateWad(void)
 {
+	#ifdef __WIIU__
+	return "sdmc:/srb2";
+	#endif
 	const char *waddir;
 
 	I_OutputMsg("Looking for WADs in: ");

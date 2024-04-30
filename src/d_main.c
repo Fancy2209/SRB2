@@ -1775,6 +1775,8 @@ const char *D_Home(void)
 
 #ifdef ANDROID
 	return "/data/data/org.srb2/";
+#elif __WIIU__
+	return "sdmc:/";
 #endif
 
 	if (M_CheckParm("-home") && M_IsNextParm())

@@ -93,7 +93,7 @@ typedef long ssize_t;
 	#define strncasecmp             strnicmp
 	#define strcasecmp              strcmpi
 #endif
-#if defined (__unix__) || defined (__APPLE__) || defined (UNIXCOMMON)
+#if defined (__unix__) || defined (__APPLE__) || defined (UNIXCOMMON) || !defined (__WIIU__)
 	#undef stricmp
 	#define stricmp(x,y) strcasecmp(x,y)
 	#undef strnicmp
@@ -109,7 +109,7 @@ char *nongnu_strcasestr(const char *in, const char *what);
 int startswith (const char *base, const char *tag);
 int endswith (const char *base, const char *tag);
 
-#if defined (_WIN32) || defined (__HAIKU__)
+#if defined (_WIN32) || defined (__HAIKU__) || defined (__WIIU__)
 #define HAVE_DOSSTR_FUNCS
 #endif
 
@@ -153,6 +153,15 @@ typedef int32_t boolean;
 #else
 #define boolean BOOL
 #endif
+#ifdef __WIIU__
+#include <stdbool.h>
+#undef true
+#undef false
+#define __BYTEBOOL__
+#define boolean bool
+#endif
+
+
 
 #ifndef __cplusplus
 #ifndef _WIN32

@@ -121,7 +121,9 @@
 # SDL_PKGCONFIG=
 # SDL_CONFIG= - sdl-config command.
 # SDL_CFLAGS=, SDL_LDFLAGS=
-
+ifdef WIIU
+include $(DEVKITPRO)/wut/share/wut_rules
+endif
 clean_targets=cleandep clean distclean info
 
 .PHONY : $(clean_targets) all
