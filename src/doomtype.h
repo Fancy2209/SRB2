@@ -197,7 +197,7 @@ size_t strlcpy(char *dst, const char *src, size_t siz);
 		#define boolean BOOL
 	#elif defined(_NDS)
 		#define boolean bool
-	#elif defined(_PS3) // defined(__GNUC__)?
+	#elif (defined(_PS3) || defined(_WII))	 // defined(__GNUC__)?
 		#include <stdbool.h>  //_bool_true_false_are_defined?
 		#define boolean bool
 	#else

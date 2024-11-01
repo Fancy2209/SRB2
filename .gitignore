@@ -21,3 +21,9 @@ Win32_LIB_ASM_Release
 /.vs
 /debian
 /assets/debian
+src/build.log
+src/srb2wii.elf.map
+bin/
+objs/
+src/apps
+objs/**

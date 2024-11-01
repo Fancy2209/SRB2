@@ -78,7 +78,7 @@ typedef LPVOID (WINAPI *p_MapViewOfFile) (HANDLE, DWORD, DWORD, DWORD, SIZE_T);
 #include "SDL_cpuinfo.h"
 #define HAVE_SDLCPUINFO
 
-#if defined (__unix__) || defined(__APPLE__) || (defined (UNIXCOMMON) && !defined (__HAIKU__))
+#if defined (__unix__) || defined(__APPLE__) || (defined (UNIXCOMMON) && !defined (__HAIKU__) && !defined (_WII))
 #if defined (__linux__)
 #include <sys/vfs.h>
 #else
@@ -94,7 +94,7 @@ typedef LPVOID (WINAPI *p_MapViewOfFile) (HANDLE, DWORD, DWORD, DWORD, SIZE_T);
 #endif
 #endif
 
-#if defined (__linux__) || (defined (UNIXCOMMON) && !defined (__HAIKU__))
+#if defined (__linux__) || (defined (UNIXCOMMON) && !defined (__HAIKU__) && !defined (_WII))
 #ifndef NOTERMIOS
 #include <termios.h>
 #include <sys/ioctl.h> // ioctl
@@ -145,6 +145,14 @@ typedef LPVOID (WINAPI *p_MapViewOfFile) (HANDLE, DWORD, DWORD, DWORD, SIZE_T);
 #define DEFAULTWADLOCATION2 "\\games\\srb2"
 #define DEFAULTSEARCHPATH1 "c:\\games"
 #define DEFAULTSEARCHPATH2 "\\games"
+#elif defined (_WII)
+#define NOCWD
+#define NOHOME
+#define NEED_SDL_GETENV
+#define DEFAULTWADLOCATION1 "sd:/srb2wii"
+#define DEFAULTWADLOCATION2 "usb:/srb2wii"
+#define DEFAULTSEARCHPATH1 "sd:/srb2wii"
+#define DEFAULTSEARCHPATH2 "usb:/srb2wii"
 #endif
 
 /**	\brief WAD file to look for
@@ -2371,7 +2379,7 @@ void I_ShutdownSystem(void)
 void I_GetDiskFreeSpace(INT64 *freespace)
 {
 #if defined (__unix__) || defined(__APPLE__) || defined (UNIXCOMMON)
-#if defined (SOLARIS) || defined (__HAIKU__)
+#if defined (SOLARIS) || defined (__HAIKU__) || defined (_WII)
 	*freespace = INT32_MAX;
 	return;
 #else // Both Linux and BSD have this, apparently.

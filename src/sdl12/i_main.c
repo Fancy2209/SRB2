@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 // init Wii-specific stuff
 #ifdef _WII
 	// Start network
-	if_config(localip, netmask, gateway, TRUE);
+	if_config(localip, netmask, gateway, true, 20);
 
 #ifdef REMOTE_DEBUGGING
 #if REMOTE_DEBUGGING == 0

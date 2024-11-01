@@ -170,6 +170,7 @@ endif
 ifdef WII
 NONX86=1
 NOHW=1
+NOHS=1
 NOPOSTPROCESSING=1
 endif
 

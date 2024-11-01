@@ -1,0 +1,145 @@
+sdl12/i_system.c: In function 'I_GetJoyName':
+sdl12/i_system.c:1588:36: warning: implicit declaration of function 'SDL_JoystickNameForIndex'; did you mean 'SDL_JoystickIndex'? [-Wimplicit-function-declaration]
+ 1588 |                         tempname = SDL_JoystickNameForIndex(joyindex);
+      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                                    SDL_JoystickIndex
+sdl12/i_system.c:1588:34: warning: assignment to 'const char *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+ 1588 |                         tempname = SDL_JoystickNameForIndex(joyindex);
+      |                                  ^
+sdl12/i_system.c:1596:26: warning: assignment to 'const char *' from 'int' makes pointer from integer without a cast [-Wint-conversion]
+ 1596 |                 tempname = SDL_JoystickNameForIndex(joyindex);
+      |                          ^
+sdl12/i_system.c: At top level:
+sdl12/i_system.c:2688:7: error: conflicting types for 'I_ClipboardPaste'; have 'char *(void)'
+ 2688 | char *I_ClipboardPaste(void)
+      |       ^~~~~~~~~~~~~~~~
+In file included from sdl12/i_system.c:232:
+sdl12/../i_system.h:305:13: note: previous declaration of 'I_ClipboardPaste' with type 'const char *(void)'
+  305 | const char *I_ClipboardPaste(void);
+      |             ^~~~~~~~~~~~~~~~
+make: *** [Makefile:800: ../objs/Wii/SDL/Release/i_system.o] Error 1
+make: *** Waiting for unfinished jobs....
+sdl12/sdl_sound.c: In function 'Snd_LockAudio':
+sdl12/sdl_sound.c:214:18: error: 'nosound' undeclared (first use in this function)
+  214 |         else if (nosound) return;
+      |                  ^~~~~~~
+sdl12/sdl_sound.c:214:18: note: each undeclared identifier is reported only once for each function it appears in
+sdl12/sdl_sound.c:215:18: error: 'nomidimusic' undeclared (first use in this function)
+  215 |         else if (nomidimusic && nodigimusic
+      |                  ^~~~~~~~~~~
+sdl12/sdl_sound.c:215:33: error: 'nodigimusic' undeclared (first use in this function)
+  215 |         else if (nomidimusic && nodigimusic
+      |                                 ^~~~~~~~~~~
+sdl12/sdl_sound.c: In function 'Snd_UnlockAudio':
+sdl12/sdl_sound.c:228:18: error: 'nosound' undeclared (first use in this function)
+  228 |         else if (nosound) return;
+      |                  ^~~~~~~
+sdl12/sdl_sound.c:229:18: error: 'nomidimusic' undeclared (first use in this function)
+  229 |         else if (nomidimusic && nodigimusic
+      |                  ^~~~~~~~~~~
+sdl12/sdl_sound.c:229:33: error: 'nodigimusic' undeclared (first use in this function)
+  229 |         else if (nomidimusic && nodigimusic
+      |                                 ^~~~~~~~~~~
+sdl12/sdl_sound.c: In function 'I_SetChannels':
+sdl12/sdl_sound.c:513:13: error: 'nosound' undeclared (first use in this function)
+  513 |         if (nosound)
+      |             ^~~~~~~
+sdl12/sdl_sound.c: In function 'I_StartSound':
+sdl12/sdl_sound.c:630:13: error: 'nosound' undeclared (first use in this function)
+  630 |         if (nosound)
+      |             ^~~~~~~
+sdl12/sdl_sound.c: In function 'I_ShutdownSound':
+sdl12/sdl_sound.c:1158:13: error: 'nosound' undeclared (first use in this function)
+ 1158 |         if (nosound || !sound_started)
+      |             ^~~~~~~
+sdl12/sdl_sound.c:1172:13: error: 'nomidimusic' undeclared (first use in this function)
+ 1172 |         if (nomidimusic && nodigimusic)
+      |             ^~~~~~~~~~~
+sdl12/sdl_sound.c:1172:28: error: 'nodigimusic' undeclared (first use in this function)
+ 1172 |         if (nomidimusic && nodigimusic)
+      |                            ^~~~~~~~~~~
+sdl12/sdl_sound.c: In function 'I_StartupSound':
+sdl12/sdl_sound.c:1192:9: error: 'nomidimusic' undeclared (first use in this function)
+ 1192 |         nomidimusic = nodigimusic = true;
+      |         ^~~~~~~~~~~
+sdl12/sdl_sound.c:1192:23: error: 'nodigimusic' undeclared (first use in this function)
+ 1192 |         nomidimusic = nodigimusic = true;
+      |                       ^~~~~~~~~~~
+sdl12/sdl_sound.c:1211:17: error: 'nosound' undeclared (first use in this function)
+ 1211 |                 nosound = nomidimusic = nodigimusic = true;
+      |                 ^~~~~~~
+sdl12/sdl_sound.c: In function 'I_ShutdownMIDIMusic':
+sdl12/sdl_sound.c:1346:9: error: 'nomidimusic' undeclared (first use in this function)
+ 1346 |         nomidimusic = false;
+      |         ^~~~~~~~~~~
+sdl12/i_video.c: In function 'I_GetEvent':
+sdl12/i_video.c:1040:70: error: too many arguments to function 'I_ResumeSong'
+ 1040 |                                                         if (!paused) I_ResumeSong(0); //resume it
+      |                                                                      ^~~~~~~~~~~~
+In file included from sdl12/../s_sound.h:17,
+                 from sdl12/../i_system.h:173,
+                 from sdl12/i_video.c:93:
+sdl12/../i_sound.h:219:6: note: declared here
+  219 | void I_ResumeSong(void);
+      |      ^~~~~~~~~~~~
+sdl12/i_video.c:1050:57: error: too many arguments to function 'I_PauseSong'
+ 1050 |                                                         I_PauseSong(0); //pause it
+      |                                                         ^~~~~~~~~~~
+sdl12/../i_sound.h:211:6: note: declared here
+  211 | void I_PauseSong(void);
+      |      ^~~~~~~~~~~
+sdl12/sdl_sound.c:1347:13: error: 'nodigimusic' undeclared (first use in this function)
+ 1347 |         if (nodigimusic) I_ShutdownMusic();
+      |             ^~~~~~~~~~~
+sdl12/sdl_sound.c: In function 'I_ShutdownDigMusic':
+sdl12/sdl_sound.c:1363:9: error: 'nodigimusic' undeclared (first use in this function)
+ 1363 |         nodigimusic = false;
+      |         ^~~~~~~~~~~
+sdl12/sdl_sound.c:1364:13: error: 'nomidimusic' undeclared (first use in this function)
+ 1364 |         if (nomidimusic) I_ShutdownMusic();
+      |             ^~~~~~~~~~~
+sdl12/sdl_sound.c: In function 'I_InitMIDIMusic':
+sdl12/sdl_sound.c:1483:13: error: 'nodigimusic' undeclared (first use in this function)
+ 1483 |         if (nodigimusic) I_InitMusic();
+      |             ^~~~~~~~~~~
+sdl12/sdl_sound.c: In function 'I_InitDigMusic':
+sdl12/sdl_sound.c:1488:13: error: 'nomidimusic' undeclared (first use in this function)
+ 1488 |         if (nomidimusic) I_InitMusic();
+      |             ^~~~~~~~~~~
+make: *** [Makefile:800: ../objs/Wii/SDL/Release/i_video.o] Error 1
+sdl12/sdl_sound.c: In function 'I_InitMusic':
+sdl12/sdl_sound.c:1506:14: error: 'nomidimusic' undeclared (first use in this function)
+ 1506 |         if ((nomidimusic && nodigimusic) || dedicated)
+      |              ^~~~~~~~~~~
+sdl12/sdl_sound.c:1506:29: error: 'nodigimusic' undeclared (first use in this function)
+ 1506 |         if ((nomidimusic && nodigimusic) || dedicated)
+      |                             ^~~~~~~~~~~
+sdl12/sdl_sound.c: At top level:
+sdl12/sdl_sound.c:1611:9: error: conflicting types for 'I_PlaySong'; have '_Bool(int32_t,  _Bool)' {aka '_Bool(int,  _Bool)'}
+ 1611 | boolean I_PlaySong(INT32 handle, boolean looping)
+      |         ^~~~~~~~~~
+In file included from sdl12/../s_sound.h:17,
+                 from sdl12/../i_system.h:173,
+                 from sdl12/sdl_sound.c:60:
+sdl12/../i_sound.h:194:9: note: previous declaration of 'I_PlaySong' with type '_Bool(_Bool)'
+  194 | boolean I_PlaySong(boolean looping);
+      |         ^~~~~~~~~~
+sdl12/sdl_sound.c:1643:6: error: conflicting types for 'I_PauseSong'; have 'void(int32_t)' {aka 'void(int)'}
+ 1643 | void I_PauseSong(INT32 handle)
+      |      ^~~~~~~~~~~
+sdl12/../i_sound.h:211:6: note: previous declaration of 'I_PauseSong' with type 'void(void)'
+  211 | void I_PauseSong(void);
+      |      ^~~~~~~~~~~
+sdl12/sdl_sound.c:1663:6: error: conflicting types for 'I_ResumeSong'; have 'void(int32_t)' {aka 'void(int)'}
+ 1663 | void I_ResumeSong(INT32 handle)
+      |      ^~~~~~~~~~~~
+sdl12/../i_sound.h:219:6: note: previous declaration of 'I_ResumeSong' with type 'void(void)'
+  219 | void I_ResumeSong(void);
+      |      ^~~~~~~~~~~~
+sdl12/sdl_sound.c:1677:6: error: conflicting types for 'I_StopSong'; have 'void(int32_t)' {aka 'void(int)'}
+ 1677 | void I_StopSong(INT32 handle)
+      |      ^~~~~~~~~~
+sdl12/../i_sound.h:203:6: note: previous declaration of 'I_StopSong' with type 'void(void)'
+  203 | void I_StopSong(void);
+      |      ^~~~~~~~~~
+make: *** [Makefile:800: ../objs/Wii/SDL/Release/sdl_sound.o] Error 1

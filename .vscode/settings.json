@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdbool.h": "c",
+        "limits.h": "c",
+        "i_system.h": "c"
+    }
+}
