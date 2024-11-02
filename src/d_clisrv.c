@@ -2303,6 +2303,7 @@ static void Command_connect(void)
 		else if (I_NetOpenSocket)
 		{
 			MSCloseUDPSocket(); // Tidy up before wiping the slate.
+			// Start network
 			I_NetOpenSocket();
 			netgame = true;
 			multiplayer = true;

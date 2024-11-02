@@ -132,7 +132,7 @@ typedef LPVOID (WINAPI *p_MapViewOfFile) (HANDLE, DWORD, DWORD, DWORD, SIZE_T);
 #endif
 
 // Locations for searching the srb2.srb
-#if defined (__unix__) || defined(__APPLE__) || defined (UNIXCOMMON)
+#if defined (__unix__) || defined(__APPLE__) || defined (UNIXCOMMON) && !defined(__wii__)
 #define DEFAULTWADLOCATION1 "/usr/local/share/games/SRB2"
 #define DEFAULTWADLOCATION2 "/usr/local/games/SRB2"
 #define DEFAULTWADLOCATION3 "/usr/share/games/SRB2"
@@ -1047,7 +1047,10 @@ static int joy_open(const char *fname)
 			return -1;
 		}
 		else
-		{
+		{	
+			while (SDL_NumJoysticks() == 0) {
+				SDL_PumpEvents();
+			}
 			num_joy = SDL_NumJoysticks();
 		}
 
@@ -1067,6 +1070,9 @@ static int joy_open(const char *fname)
 		//joy_open(fname);
 	}
 
+	while (SDL_NumJoysticks() == 0) {
+		SDL_PumpEvents();
+	}
 	num_joy = SDL_NumJoysticks();
 
 	if (joyindex <= 0 || num_joy == 0 || JoyInfo.oldjoy == joyindex)
@@ -1083,7 +1089,7 @@ static int joy_open(const char *fname)
 		if (joyindex <= 0 || num_joy == 0) return 0;
 	}
 
-	JoyInfo.dev = SDL_JoystickOpen(joyindex-1);
+		JoyInfo.dev = SDL_JoystickOpen(joyindex-1);
 
 	if (JoyInfo.dev == NULL)
 	{

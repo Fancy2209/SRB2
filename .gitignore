@@ -27,3 +27,4 @@ bin/
 objs/
 src/apps
 objs/**
+build/

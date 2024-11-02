@@ -2,6 +2,9 @@
     "files.associations": {
         "stdbool.h": "c",
         "limits.h": "c",
-        "i_system.h": "c"
+        "i_system.h": "c",
+        "socket.h": "c",
+        "doomdef.h": "c",
+        "unistd.h": "c"
     }
 }

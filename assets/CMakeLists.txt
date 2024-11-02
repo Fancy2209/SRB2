@@ -1,5 +1,5 @@
 ## Assets Target Configuration ##
-
+return()
 # For prepending the current source path, later
 FUNCTION(PREPEND var prefix)
    SET(listVar "")

@@ -30,13 +30,13 @@
 #include <limits.h>
 #include <network.h>
 #include <fat.h>
+#include <wiisocket.h>
+#include <gctypes.h>
+#include <gccore.h>
 #ifdef REMOTE_DEBUGGING
 #include <debug.h>
 #endif
 static char wiicwd[PATH_MAX] = "sd:/";
-static char localip[16] = {0};
-static char gateway[16] = {0};
-static char netmask[16] = {0};
 #endif
 
 #ifdef HAVE_SDL
@@ -140,9 +140,6 @@ int main(int argc, char **argv)
 
 // init Wii-specific stuff
 #ifdef _WII
-	// Start network
-	//if_config(localip, netmask, gateway, true, 20);
-
 #ifdef REMOTE_DEBUGGING
 #if REMOTE_DEBUGGING == 0
 	DEBUG_Init(GDBSTUB_DEVICE_TCP, GDBSTUB_DEF_TCPPORT); // Port 2828
@@ -158,13 +155,15 @@ int main(int argc, char **argv)
 	fatInitDefault();
 
 	if (getcwd(wiicwd, PATH_MAX))
-		I_PutEnv(va("HOME=%ssrb2wii", wiicwd));
+		putenv(va("HOME=%s", wiicwd));
+	//SYS_STDIO_Report(true);
 #endif
 
 	logdir = D_Home();
 
 #ifdef LOGMESSAGES
 #ifdef _WII
+		logstream = fopen(va("%s/srb2log.txt",logdir), "a");
 #elif defined(DEFAULTDIR)
 	if (logdir)
 		logstream = fopen(va("%s/"DEFAULTDIR"/log.txt",logdir), "wt");
@@ -173,9 +172,33 @@ int main(int argc, char **argv)
 #endif
 		logstream = fopen("./log.txt", "wt");
 #endif
-
 	//I_OutputMsg("I_StartupSystem() ...\n");
 	I_StartupSystem();
+	#ifdef _WII
+	// Credits to Andrew Piroli
+		// try a few times to initialize libwiisocket (?)
+	int socket_init_success = -1;
+	for (int attempts = 0;attempts < 20;attempts++) {
+		socket_init_success = wiisocket_init();
+		CONS_Printf("attempt: %d wiisocket_init: %d\n", attempts, socket_init_success);
+		if (socket_init_success == 0)
+			break;
+	}
+	if (socket_init_success != 0) {
+		puts("failed to init wiisocket");
+	}
+	// try a few times to get an ip (?)
+	u32 ip = 0;
+	for (int attempts = 0; attempts < 20; attempts++) {
+		ip = gethostid();
+		CONS_Printf("attempt: %d gethostid: %x\n", attempts, ip);
+		if (ip)
+			break;
+	}
+	if (!ip) {
+		puts("failed to get ip");
+	}
+	#endif
 #if defined (_WIN32)
 	{
 #if 0 // just load the DLL
@@ -195,6 +218,7 @@ int main(int argc, char **argv)
 #endif
 	MakeCodeWritable();
 #endif
+
 	// startup SRB2
 	CONS_Printf("Setting up SRB2...\n");
 	D_SRB2Main();
