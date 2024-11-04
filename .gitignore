@@ -28,3 +28,4 @@ objs/
 src/apps
 objs/**
 build/
+.vscode/settings.json
