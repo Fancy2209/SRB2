@@ -155,7 +155,7 @@ int main(int argc, char **argv)
 	fatInitDefault();
 
 	if (getcwd(wiicwd, PATH_MAX))
-		putenv(va("HOME=%s", wiicwd));
+		putenv("HOME=/SRB2Wii/");
 	//SYS_STDIO_Report(true);
 #endif
 
