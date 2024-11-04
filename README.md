@@ -13,6 +13,11 @@
 - libupnp (Linux/OS X only)
 - libgme (Linux/OS X only)
 
+For Wii, you require the following:
+`pacman -S wii-sdl2 wii-sdl2_mixer wii-opengx`
+you also need to use pacman -U to install the packages from here:
+https://github.com/AndrewPiroli/wii-curl/releases/latest
+
 ## Compiling
 
 See [SRB2 Wiki/Source code compiling](http://wiki.srb2.org/wiki/Source_code_compiling)

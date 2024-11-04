@@ -1525,12 +1525,12 @@ boolean I_InitTcpNetwork(void)
 
 		ret = true;
 	}
-	else// if (M_CheckParm("-connect"))
+	else if (M_CheckParm("-connect"))
 	{
-		//if (M_IsNextParm())
-			strcpy(serverhostname, "192.168.60.97");
-		//else
-			//serverhostname[0] = 0; // assuming server in the LAN, use broadcast to detect it
+		if (M_IsNextParm())
+			strcpy(serverhostname, M_GetNextParm());
+		else
+			serverhostname[0] = 0; // assuming server in the LAN, use broadcast to detect it
 
 		// server address only in ip
 		if (serverhostname[0])
