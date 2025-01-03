@@ -2319,6 +2319,8 @@ static boolean CL_ServerConnectionTicker(const char *tmpsave, tic_t *oldtic, tic
 
 #ifdef NONET
 	(void)tmpsave;
+	tic_t empty_asksent = 0;
+	asksent = &empty_asksent;
 #endif
 
 	switch (cl_mode)
