@@ -124,6 +124,14 @@ endif()
 # Dependencies
 add_subdirectory(thirdparty)
 
+if(PPU)
+	find_package(ZLIB REQUIRED)
+	find_package(PNG REQUIRED)
+	find_package(SDL2 REQUIRED)
+	find_package(SDL2_mixer REQUIRED)
+	find_package(CURL REQUIRED)
+endif()
+
 if("${SRB2_CONFIG_SYSTEM_LIBRARIES}")
 	find_package(ZLIB REQUIRED)
 	find_package(PNG REQUIRED)
@@ -168,6 +176,10 @@ set(SRB2_SDL2_EXE_NAME "" CACHE STRING "Override executable binary output name")
 set(SRB2_SDL2_EXE_SUFFIX "" CACHE STRING "Optional executable suffix, separated by an underscore")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/src)
+
+if(PPU)
+	include_directories(/usr/local/ps3dev/portlibs/ppu/include/SDL2/)
+endif()
 
 add_subdirectory(src)
 add_subdirectory(assets)

@@ -14,6 +14,8 @@ find_path(SDL2_MIXER_INCLUDE_DIR
 	NAMES SDL_mixer.h
 	PATHS
 		${SDL2_MIXER_PKGCONF_INCLUDE_DIRS}
+		"$ENV{PSL1GHT}/portlibs/ppu/include"
+		"$ENV{PSL1GHT}/portlibs/ppu/include/SDL2"
 		"/usr/include/SDL2"
 		"/usr/local/include/SDL2"
 )
@@ -23,6 +25,7 @@ find_library(SDL2_MIXER_LIBRARY
 	NAMES SDL2_mixer
 	PATHS
 		${SDL2_MIXER_PKGCONF_LIBRARY_DIRS}
+		"$ENV{PSL1GHT}/portlibs/ppu/lib"
 		"/usr/lib"
 		"/usr/local/lib"
 )

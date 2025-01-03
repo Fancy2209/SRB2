@@ -163,6 +163,8 @@ const char *wadSearchPaths[] = {
 	"/usr/local/games",
 	"/usr/games",
 	"/usr/local",
+#elif defined (_PS3)
+	"/dev_hdd0/SRB2-PS3",
 #elif defined (_WIN32)
 	"c:\\games",
 	"\\games",

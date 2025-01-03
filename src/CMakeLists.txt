@@ -155,7 +155,9 @@ if (UNIX)
 	target_compile_definitions(SRB2SDL2 PRIVATE -DUNIXCOMMON)
 endif()
 
-if(CMAKE_COMPILER_IS_GNUCC)
+if(PPU)
+	find_program(OBJCOPY ppu-objcopy)
+else()
 	find_program(OBJCOPY objcopy)
 endif()
 
@@ -177,8 +179,10 @@ if(NOT "${SRB2_CONFIG_SYSTEM_LIBRARIES}")
 	target_include_directories(SRB2SDL2 PRIVATE "${libgme_SOURCE_DIR}")
 endif()
 
+if(NOT PPU)
 target_link_libraries(SRB2SDL2 PRIVATE openmpt)
 target_compile_definitions(SRB2SDL2 PRIVATE -DHAVE_OPENMPT)
+endif()
 
 target_link_libraries(SRB2SDL2 PRIVATE ZLIB::ZLIB PNG::PNG CURL::libcurl)
 target_compile_definitions(SRB2SDL2 PRIVATE -DHAVE_ZLIB -DHAVE_PNG -DHAVE_CURL -D_LARGEFILE64_SOURCE)

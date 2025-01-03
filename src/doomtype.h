@@ -109,7 +109,7 @@ char *nongnu_strcasestr(const char *in, const char *what);
 int startswith (const char *base, const char *tag);
 int endswith (const char *base, const char *tag);
 
-#if defined (_WIN32) || defined (__HAIKU__)
+#if defined (_WIN32) || defined (__HAIKU__) || defined(_PS3)
 #define HAVE_DOSSTR_FUNCS
 #endif
 
@@ -150,18 +150,34 @@ size_t strlcpy(char *dst, const char *src, size_t siz);
 // between "bool" and "int32_t" takes over.
 #ifndef _WIN32
 typedef int32_t boolean;
+#elif defined(_PS3)
+#include <stdbool.h>  //_bool_true_false_are_defined?
+#define boolean bool
 #else
 #define boolean BOOL
 #endif
 
-#ifndef __cplusplus
-#ifndef _WIN32
-enum {false = 0, true = 1};
-#else
-#define false FALSE
-#define true TRUE
-#endif
-#endif
+// \note __BYTEBOOL__ used to be set above if "macintosh" was defined,
+// if macintosh's version of boolean type isn't needed anymore, then isn't this macro pointless now?
+#ifndef __BYTEBOOL__
+    #define __BYTEBOOL__
+
+    //faB: clean that up !!
+    #if defined( _MSC_VER)  && (_MSC_VER >= 1800) // MSVC 2013 and forward
+        #include "stdbool.h"
+    #elif (defined (_WIN32) || (defined (_WIN32_WCE) && !defined (__GNUC__))) && !defined (_XBOX)
+        #define false   FALSE           // use windows types
+        #define true    TRUE
+        #define boolean BOOL
+    #elif defined(_NDS)
+        #define boolean bool
+    #elif defined(_PS3) // defined(__GNUC__)?
+        #include <stdbool.h>  //_bool_true_false_are_defined?
+        #define boolean bool
+    #else
+        typedef enum {false, true} boolean;
+    #endif
+#endif // __BYTEBOOL__
 
 /* 7.18.2.1  Limits of exact-width integer types */
 

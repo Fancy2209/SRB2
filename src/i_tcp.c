@@ -19,6 +19,10 @@
 #include <unistd.h>
 #endif
 
+#ifdef _PS3
+#define NO_IPV6
+#endif
+
 #ifndef NO_IPV6
 	#define HAVE_IPV6
 #endif
@@ -58,7 +62,9 @@
 			#include <sys/socket.h>
 			#include <netinet/in.h>
 			#include <netdb.h>
-			#include <sys/ioctl.h>
+			#ifndef _PS3
+				#include <sys/ioctl.h>
+			#endif
 		#endif //normal BSD API
 
 		#include <errno.h>
