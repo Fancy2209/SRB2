@@ -1773,6 +1773,10 @@ const char *D_Home(void)
 {
 	const char *userhome = NULL;
 
+#ifdef _PS3
+	return "/dev_hdd0/SRB2-PS3/";
+#endif
+
 #ifdef ANDROID
 	return "/data/data/org.srb2/";
 #endif

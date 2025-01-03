@@ -476,6 +476,8 @@ enum {
 // Name of local directory for config files and savegames
 #if (defined (__unix__) || defined (UNIXCOMMON)) && !defined (__CYGWIN__) && !defined (__APPLE__)
 #define DEFAULTDIR ".srb2"
+#elif defined (_PS3)
+#define DEFAULTDIR ""
 #else
 #define DEFAULTDIR "srb2"
 #endif
