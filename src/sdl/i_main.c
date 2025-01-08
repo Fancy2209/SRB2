@@ -178,6 +178,9 @@ int main(int argc, char **argv)
 	myargc = argc;
 	myargv = argv; /// \todo pull out path to exe from this string
 
+	// Makes SDL actually use the PS3 Video API, hopefully makes it last more than 256 frames
+	// TODO: This actually has RSXGL Support, test it
+	SDL_SetHintWithPriority("SDL_VIDEODRIVER", "psl1ght", SDL_HINT_OVERRIDE); 
 #ifdef HAVE_TTF
 #ifdef _WIN32
 	I_StartupTTF(FONTPOINTSIZE, SDL_INIT_VIDEO|SDL_INIT_AUDIO, SDL_SWSURFACE);
